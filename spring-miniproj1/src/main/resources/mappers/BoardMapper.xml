@@ -23,4 +23,8 @@
 		select bno, title, author, content, created_at createdAt ,view_count viewCount
 		from tb_boards where bno = #{bno}
     </select>
+    
+     <update id="update">
+		update tb_boards set title = #{title}, content = #{content} where bno = #{bno}
+    </update>
 </mapper>

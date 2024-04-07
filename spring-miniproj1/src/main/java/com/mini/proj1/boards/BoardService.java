@@ -35,6 +35,11 @@ public class BoardService {
 	public BoardVO fetchUpdateFormData(BoardVO boardVO) {
 		return boardMapper.view(boardVO);
 	}
+	
+	public int update(BoardVO boardVO) {
+		return boardMapper.update(boardVO);
+	}
+	
 //
 //	public int delete(BoardVO boardVO) {
 //		try {
@@ -51,21 +56,7 @@ public class BoardService {
 //		}
 //		return 1;
 //	}
-//
-//	public int update(BoardVO boardVO) {
-//		try {
-//			boardDAO.update(boardVO);
-//			BaseDAO.conn.commit();
-//		} catch (Exception e) {
-//			try {
-//				BaseDAO.conn.rollback();
-//			} catch (SQLException e1) {
-//				e1.printStackTrace();
-//			}
-//			return 0;
-//		}
-//		return 1;
-//	}
+
 //
 //	public int insert(BoardVO boardVO) {
 //		try {

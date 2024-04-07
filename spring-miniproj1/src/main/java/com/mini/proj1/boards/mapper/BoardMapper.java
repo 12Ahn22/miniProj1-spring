@@ -9,4 +9,6 @@ public interface BoardMapper {
 
 	BoardVO view(BoardVO boardVO);
 
+	int update(BoardVO boardVO);
+
 }

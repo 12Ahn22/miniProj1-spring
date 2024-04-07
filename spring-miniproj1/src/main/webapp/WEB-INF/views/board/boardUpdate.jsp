@@ -39,7 +39,7 @@
 				content:content.value
 			};
 
-			fetch("board", {
+			fetch("update", {
 								method: "POST",
 								body: JSON.stringify(param),
 								headers: { "Content-type": "application/json; charset=utf-8" }
@@ -48,7 +48,7 @@
 								if (data.status === 204) {
 									alert("게시글 수정에 성공했습니다.");
 									// 페이지 리다이렉트
-									location = "board?action=view&bno=" + bno.value;
+									location = "view?bno=" + bno.value;
 								} else {
 									alert(data.statusMessage);
 								}

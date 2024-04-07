@@ -8,7 +8,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -85,13 +87,15 @@ public class BoardController {
 		model.addAttribute("board", board);
 		return "board/boardUpdate";
 	}
-//
-//	public Map<String, Object> update(HttpServletRequest request, BoardVO boardVO) {
-//		Map<String, Object> map = new HashMap<>();
-//		HttpSession session = request.getSession();
-//		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember"); // 로그인 한 유저
-//		
-//		// 로그인 하지않았다면
+
+	@RequestMapping("update")
+	@ResponseBody
+	public Map<String, Object> update(Model model, @RequestBody BoardVO boardVO) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// HttpSession session = request.getSession();
+		// MemberVO loginMember = (MemberVO) session.getAttribute("loginMember"); // 로그인 한 유저
+		
+		// 로그인 하지않았다면
 //		if(loginMember == null) {
 //			map.put("status", 404);
 //			map.put("statusMessage", "로그인을 해야합니다.");
@@ -107,18 +111,18 @@ public class BoardController {
 //				return map;
 //			}
 //		}
-//		
-//		int updated = boardService.update(boardVO);
-//		
-//		if(updated == 1) { // 성공
-//			map.put("status", 204);
-//		} else {
-//			map.put("status", 404);
-//			map.put("statusMessage", "게시글 수정에 실패하였습니다");
-//		}
-//		
-//		return map;
-//	}
+		
+		int updated = boardService.update(boardVO);
+		
+		if(updated == 1) { // 성공
+			map.put("status", 204);
+		} else {
+			map.put("status", 404);
+			map.put("statusMessage", "게시글 수정에 실패하였습니다");
+		}
+		
+		return map;
+	}
 //
 //	public String insertForm(HttpServletRequest request) {
 //		// 로그인 상태라면, 해당 로그인 정보를 JSP로 보내주기
