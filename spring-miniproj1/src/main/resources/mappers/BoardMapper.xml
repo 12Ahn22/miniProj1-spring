@@ -17,6 +17,14 @@
 			tb.created_at createdAt, tb.view_count viewCount
 		from tb_boards tb left join tb_members tm on tb.author = tm.id
 		<include refid="search"/>
+		order by bno desc limit #{skip}, #{size}
+    </select>
+    
+    <select id="getTotalCount">
+		select 
+			count(*)  
+		<include refid="search"/>
+		from tb_boards tb 
     </select>
     
     <select id="view" resultType="com.mini.proj1.boards.BoardVO">
