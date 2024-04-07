@@ -41,7 +41,7 @@
 				<tbody>
 					<c:forEach var="member" items="${pageResponseVO.list}">
 						<tr>
-							<td><a href="member/view?id=${member.id}">${member.id}</a></td>
+							<td><a href="view?id=${member.id}">${member.id}</a></td>
 							<td>${member.name}</td>
 							<td>${member.gender}</td>
 							<td>${member.phone}</td>
@@ -84,5 +84,38 @@
 	        </div>
 		</main>
 	</div>
+	<script>
+    document
+    .querySelector('.pagination')
+    .addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const target = e.target;
+
+      if (target.tagName !== 'A') {
+        return;
+      }
+      //dataset 프로퍼티로 접근 또는 속성 접근 메서드 getAttribute() 사용 하여 접근 가능
+      //const num = target.getAttribute("data-num")
+      const num = target.dataset['num'];
+      location = `?pageNo=\${num}&size=\${size}`;
+    });
+
+  document.querySelector('#size').addEventListener('change', (e) => {
+    searchForm.submit();
+  });
+
+  const searchForm = document.getElementById('searchForm');
+  searchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    searchForm.submit();
+  });
+
+	const url = new URL(window.location.href);
+	const urlParams = url.searchParams;
+	if(urlParams.get("searchKey")){
+		searchKey.value = urlParams.get("searchKey");
+	}
+	</script>
 </body>
 </html>

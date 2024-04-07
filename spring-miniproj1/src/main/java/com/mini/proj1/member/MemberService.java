@@ -51,8 +51,8 @@ public class MemberService {
 //		list = memberDAO.list();
 //		return list;
 //	}
-//
-//	public MemberVO view(MemberVO member) {
+
+	public MemberVO view(MemberVO member) {
 //		MemberVO memberVO = null;
 //		try {
 //			memberVO = memberDAO.view(member);
@@ -62,8 +62,8 @@ public class MemberService {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-//		return memberVO;
-//	}
+		return memberMapper.view(member);
+	}
 //
 //	public int delete(MemberVO member) {
 //		try {

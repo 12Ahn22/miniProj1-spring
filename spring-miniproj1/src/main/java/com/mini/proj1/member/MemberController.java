@@ -42,13 +42,14 @@ public class MemberController {
 		model.addAttribute("sizes", codeService.getList());
 		return "member/memberList";
 	}
-//
-//	public String view(HttpServletRequest request, MemberVO member) {
-//		MemberVO viewMember = memberService.view(member);
-//		request.setAttribute("member", viewMember);
-//		return "memberView";
-//	}
-//
+
+	@RequestMapping("view")
+	public String view(Model model, MemberVO member) {
+		MemberVO viewMember = memberService.view(member);
+		model.addAttribute("member", viewMember);
+		return "member/memberView";
+	}
+
 //	public Map<String, Object> delete(HttpServletRequest request, MemberVO member) {
 //		Map<String, Object> map = new HashMap<>();
 //		HttpSession session = request.getSession();

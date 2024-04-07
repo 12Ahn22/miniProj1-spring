@@ -26,7 +26,7 @@
 						</c:forEach>
 					</div>
 					<div>
-						<a class="btn btn-primary" href="member?action=updateForm&id=${member.id}">수정</a> <button class="btn btn-secondary" id="deleteBtn">삭제</button>
+						<a class="btn btn-primary" href="updateForm?id=${member.id}">수정</a> <button class="btn btn-secondary" id="deleteBtn">삭제</button>
 					</div>
 				</main>
 			</div>
@@ -40,7 +40,7 @@
 							id: memberId.value,
 							action: "delete"
 						}
-						fetch("member", {
+						fetch("delete", {
 							method: "POST",
 							body: JSON.stringify(param),
 							headers: { "Content-type": "application/json; charset=utf-8" }
@@ -49,14 +49,13 @@
 							if (data.status === 204) {
 								alert("회원 정보삭제에 성공했습니다.");
 								// 페이지 리다이렉트
-								location = "member?action=list";
+								location = "list";
 							} else {
 								alert(data.statusMessage);
 							}
 						})
 					}
 				});
-
 			</script>
 		</body>
 

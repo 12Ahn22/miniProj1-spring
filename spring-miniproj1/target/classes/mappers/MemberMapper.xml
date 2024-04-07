@@ -7,7 +7,7 @@
     <sql id="search">
         <where>
             <if test="searchKey != null and searchKey != ''">
-               id  like concat('%', #{searchKey}, '%')
+               id like concat('%', #{searchKey}, '%')
             </if>
         </where>
     </sql>

@@ -105,7 +105,6 @@ prefix="c"%>
         //dataset 프로퍼티로 접근 또는 속성 접근 메서드 getAttribute() 사용 하여 접근 가능
         //const num = target.getAttribute("data-num")
         const num = target.dataset['num'];
-        console.log('클릭?');
         location = `?pageNo=\${num}&size=\${size}`;
       });
 
