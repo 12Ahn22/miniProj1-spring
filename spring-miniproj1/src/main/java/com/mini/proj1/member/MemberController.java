@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mini.proj1.code.CodeService;
 import com.mini.proj1.hobby.HobbyVO;
+import com.mini.proj1.memberhobby.MemberHobbyVO;
 import com.mini.proj1.paging.PageRequestVO;
 import com.mini.proj1.paging.PageResponseVO;
 
@@ -49,7 +50,6 @@ public class MemberController {
 	@RequestMapping("view")
 	public String view(Model model, MemberVO member) {
 		MemberVO viewMember = memberService.view(member);
-		log.info("HOBBIES! {}", viewMember.getHobbies());
 		model.addAttribute("member", viewMember);
 		return "member/memberView";
 	}
@@ -117,6 +117,18 @@ public class MemberController {
 //				return map;
 //			}
 //		}
+		
+		log.info("너두 널이냐? {}", member.getHobbies());
+		// 받은 취미를 전부 insert
+		List<HobbyVO> hobbies = member.getHobbies();
+		if (hobbies != null) {
+			for(int i = 0; i < hobbies.size(); i++) {
+				HobbyVO hv = hobbies.get(i);
+				log.info("왜 널? {}", hv);
+				log.info("왜 널? {}", hv.getId());
+				log.info("왜 널? {}", hv.getHobby());
+			}
+		}
 
 		int updated = memberService.update(member);
 		if (updated == 1) { // 성공

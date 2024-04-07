@@ -40,17 +40,17 @@
 						</div>
 						<div>
 							<label>성별:</label>
-							<input type="radio" id="female" name="gender" value="female" ${member.gender.equals('female') ? 'checked'
+							<input type="radio" id="female" name="gender" value="F" ${member.gender.equals('female') ? 'checked'
 								:''} disabled>
 							<label for="female">여성</label>
-							<input type="radio" id="male" name="gender" value="male" ${member.gender.equals('female') ? '' :'checked'}
+							<input type="radio" id="male" name="gender" value="M" ${member.gender.equals('female') ? '' :'checked'}
 								disabled>
 							<label for="male">남성</label>
 						</div>
 						<div>
 							<label>취미:</label>
 							<c:forEach var="hobby" items="${hobbyList}">
-								<input type="checkbox" id="${hobby.id}" name="hobbies" value="${hobby.id}:${hobby.hobby}" ${member.hobbies[hobby.id]
+								<input type="checkbox" id="${hobby.id}" name="hobbies" value="${hobby.hobby}" ${member.mapHobbies[hobby.id]
 									!=null ? 'checked' : '' }>
 								<label for="${hobby.id}">${hobby.hobby}</label>
 							</c:forEach>
@@ -82,7 +82,7 @@
 							if (data.status === 204) {
 								alert("회원 정보 수정에 성공했습니다.");
 								// 페이지 리다이렉트
-								location = "view?id=${member.id}";
+								// location = "view?id=${member.id}";
 							} else {
 								alert(data.statusMessage);
 							}

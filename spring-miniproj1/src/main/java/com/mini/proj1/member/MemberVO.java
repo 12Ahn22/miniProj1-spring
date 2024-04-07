@@ -24,7 +24,7 @@ public class MemberVO {
 	private String phone;
 	private Gender gender;
 	private List<HobbyVO> hobbies; // 모든 취미
-//	private Map<Integer, String> hobbies; // 모든 취미
+	private Map<Integer, String> mapHobbies; // 모든 취미
 	
 	// 자동 로그인을 위한 UUID
 	private String memberUUID; 

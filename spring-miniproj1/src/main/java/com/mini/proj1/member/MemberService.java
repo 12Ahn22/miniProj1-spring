@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.mini.proj1.hobby.HobbyVO;
 import com.mini.proj1.hobby.mapper.HobbyMapper;
 import com.mini.proj1.member.mapper.MemberMapper;
+import com.mini.proj1.memberhobby.MemberHobbyVO;
+import com.mini.proj1.memberhobby.mapper.MemberHobbyMapper;
 import com.mini.proj1.paging.PageRequestVO;
 import com.mini.proj1.paging.PageResponseVO;
 
@@ -24,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberService {
 	private final MemberMapper memberMapper;
 	private final HobbyMapper hobbyMapper;
+	private final MemberHobbyMapper memberHobbyMapper;
 
 	public PageResponseVO<MemberVO> list(PageRequestVO pageRequestVO) {
 		List<MemberVO> list = null;
@@ -86,48 +89,46 @@ public class MemberService {
 	}
 
 	public int update(MemberVO member) {
-		return memberMapper.update(member);
-//		try {
-//			// 멤버-취미 테이블에서 해당 멤버를 전부 삭제
-//			memberHobbyDAO.deleteAll(member.getId());
-//
-//			// 받은 취미를 전부 insert
-//			Map<Integer, String> hobbies = member.getHobbies();
-//			if (hobbies != null) {
-//				for (var hobby : hobbies.entrySet()) {
-//					memberHobbyDAO.insert(member.getId(), hobby.getKey());
-//				}
-//			}
-//			// 멤버 수정 사항 업데이트
+		try {
+			// 멤버-취미 테이블에서 해당 멤버를 전부 삭제
+			memberHobbyMapper.deleteAll(member);
+
+			// 받은 취미를 전부 insert
+			List<HobbyVO> hobbies = member.getHobbies();
+			log.info("길이 {}", hobbies.size());
+			if (hobbies != null) {
+				for(int i = 0; i < hobbies.size(); i++) {
+					HobbyVO hv = hobbies.get(i);
+					log.info("왜 널? {}", hv);
+					log.info("왜 널? {}", hv.getId());
+					log.info("왜 널? {}", hv.getHobby());
+					log.info("왜 널? {}", member.getId());
+					MemberHobbyVO memberHobbyVO = new MemberHobbyVO(member.getId(), hv.getId());
+					memberHobbyMapper.insert(memberHobbyVO);
+				}
+			}
+			// 멤버 수정 사항 업데이트
+			memberMapper.update(member);
 //			memberDAO.update(member);
-//			BaseDAO.conn.commit();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			try {
-//				BaseDAO.conn.rollback();
-//			} catch (SQLException e1) {
-//				e1.printStackTrace();
-//			}
-//			return 0;
-//		}
-//		return 1;
+	//		BaseDAO.conn.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+		return 1;
 	}
 
 	public Map<String, Object> fetchUpdateFormData(MemberVO member) {
 		Map<String, Object> map = new HashMap<String, Object>();
-//		try {
-			MemberVO memberVO =  memberMapper.view(member);
-			List<HobbyVO> memberHobbies = memberMapper.getMemberHobbies(member); // 유저가 선택한 취미 목록
-			memberVO.setHobbies(memberHobbies);
-//
-//			// Service는 여러 DAO를 가질 수 있음
-//			List<HobbyVO> hobbyList = hobbyDAO.list();
-//			map.put("memberVO", memberVO);
-//			map.put("hobbyList", hobbyList);
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		MemberVO memberVO =  memberMapper.view(member);
+		List<HobbyVO> memberHobbies = memberMapper.getMemberHobbies(member); // 유저가 선택한 취미 목록
+		Map<Integer, String> mapHobbies = new HashMap<Integer, String>();
+		for(int i = 0; i < memberHobbies.size(); i++) {
+			HobbyVO hobby = memberHobbies.get(i);
+			mapHobbies.put(hobby.getId(), hobby.getHobby());
+		}
+		memberVO.setHobbies(memberHobbies);
+		memberVO.setMapHobbies(mapHobbies);
 		map.put("memberVO", memberVO);
 		map.put("hobbyList", hobbyMapper.list());
 		return map;
