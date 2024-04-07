@@ -82,7 +82,7 @@
 							if (data.status === 204) {
 								alert("회원 정보 수정에 성공했습니다.");
 								// 페이지 리다이렉트
-								// location = "view?id=${member.id}";
+								location = "view?id=${member.id}";
 							} else {
 								alert(data.statusMessage);
 							}
