@@ -22,8 +22,8 @@ prefix="c"%>
         <a class="btn btn-primary mb-2" href="insertForm">새 글 작성하기</a>
         <form id="searchForm" method="get" action="list">
         	<select id="size" name="size" >
-        		<c:forEach var="size" items="${sizes}">
-        			<option value="${size}" ${pageRequestVO.size == size ? 'selected' : ''} >${size}</option>
+				<c:forEach var="size" items="${sizes}">
+        			<option value="${size.codeid}" ${pageRequestVO.size == size.codeid ? 'selected' : ''} >${size.name}</option>
         		</c:forEach>
         	</select>
           <input
@@ -32,7 +32,6 @@ prefix="c"%>
             id="searchKey"
             placeholder="Search..."
           />
-          <input type="hidden" name="action" value="list" />
           <input type="submit" value="검색" />
         </form>
         <table class="table">
@@ -119,5 +118,11 @@ prefix="c"%>
       e.preventDefault();
       searchForm.submit();
     });
+
+		const url = new URL(window.location.href);
+		const urlParams = url.searchParams;
+		if(urlParams.get("searchKey")){
+			searchKey.value = urlParams.get("searchKey");
+		}
   </script>
 </html>

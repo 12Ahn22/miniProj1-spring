@@ -23,8 +23,8 @@
     <select id="getTotalCount">
 		select 
 			count(*)  
-		<include refid="search"/>
 		from tb_boards tb 
+		<include refid="search"/>
     </select>
     
     <select id="view" resultType="com.mini.proj1.boards.BoardVO">

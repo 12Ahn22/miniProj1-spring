@@ -24,6 +24,7 @@ public class BoardService {
 		try {
 			list = boardMapper.getList(pageRequestVO);
 			total = boardMapper.getTotalCount(pageRequestVO);
+			
 			log.info("list {}", list);
 			log.info("total {}", total);
 	        pageResponseVO = PageResponseVO.<BoardVO>withAll()

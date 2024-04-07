@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mini.proj1.code.CodeService;
 import com.mini.proj1.paging.PageRequestVO;
 import com.mini.proj1.paging.PageResponseVO;
 
@@ -28,15 +29,22 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardController {
 	// 스프링이 의존성을 주입해준다.
 	private final BoardService boardService;
+	private final CodeService codeService;
 
 	@RequestMapping("list")
 	public String list(@Valid PageRequestVO pageRequestVO, BindingResult bindingResult, Model model) throws Exception {
 		log.info("게시판 목록");
+		
+        if(bindingResult.hasErrors()){
+        	pageRequestVO = PageRequestVO.builder().build();
+        }
+        
 		PageResponseVO<BoardVO> pageResponseVO = boardService.list(pageRequestVO);
 		// HttpSession session = request.getSession();
 		// boolean isLogin = (session.getAttribute("loginMember") != null)? true : false;
 		
 		model.addAttribute("pageResponseVO", pageResponseVO);
+		model.addAttribute("sizes", codeService.getList());
 		// model.setAttribute("isLogin", isLogin);
 		return "board/boardList";
 	}
