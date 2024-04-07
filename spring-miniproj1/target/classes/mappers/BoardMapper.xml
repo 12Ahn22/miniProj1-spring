@@ -31,4 +31,8 @@
     <delete id="delete">
     	delete from tb_boards where bno = #{bno}
     </delete>
+    
+    <insert id="insert">
+    	insert into tb_boards (title, content, author) values(#{title},#{content}, 'ADMIN')
+    </insert>
 </mapper>

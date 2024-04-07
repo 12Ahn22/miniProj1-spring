@@ -137,13 +137,15 @@ public class BoardController {
 		// }
 		return "board/boardInsert";
 	}
-//
-//	public Map<String, Object> insert(HttpServletRequest request, BoardVO boardVO) {
-//		Map<String, Object> map = new HashMap<>();
-//		HttpSession session = request.getSession();
-//		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember"); // 로그인 한 유저
-//		
-//		// 로그인 하지않았다면
+
+	@RequestMapping("insert")
+	@ResponseBody
+	public Map<String, Object> insert(Model model, @RequestBody BoardVO boardVO) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// HttpSession session = request.getSession();
+		// MemberVO loginMember = (MemberVO) session.getAttribute("loginMember"); // 로그인 한 유저
+		
+		// 로그인 하지않았다면
 //		if(loginMember == null) {
 //			map.put("status", 404);
 //			map.put("statusMessage", "로그인을 해야합니다.");
@@ -159,17 +161,17 @@ public class BoardController {
 //				return map;
 //			}
 //		}
-//		
-//		int updated = boardService.insert(boardVO);
-//		
-//		if(updated == 1) { // 성공
-//			map.put("status", 204);
-//		} else {
-//			map.put("status", 404);
-//			map.put("statusMessage", "게시글 생성에 실패하였습니다");
-//		}
-//		
-//		return map;
-//	}
+		
+		int updated = boardService.insert(boardVO);
+		
+		if(updated == 1) { // 성공
+			map.put("status", 204);
+		} else {
+			map.put("status", 404);
+			map.put("statusMessage", "게시글 생성에 실패하였습니다");
+		}
+		
+		return map;
+	}
 
 }

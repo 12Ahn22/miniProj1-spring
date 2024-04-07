@@ -1,6 +1,5 @@
 package com.mini.proj1.boards;
 
-import java.sql.SQLException;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.mini.proj1.boards.mapper.BoardMapper;
@@ -45,20 +44,9 @@ public class BoardService {
 		return boardMapper.delete(boardVO);
 	}
 
-//
-//	public int insert(BoardVO boardVO) {
-//		try {
-//			boardDAO.insert(boardVO);
-//			BaseDAO.conn.commit();
-//		} catch (Exception e) {
-//			try {
-//				BaseDAO.conn.rollback();
-//			} catch (SQLException e1) {
-//				e1.printStackTrace();
-//			}
-//			return 0;
-//		}
-//		return 1;
-//	}
+
+	public int insert(BoardVO boardVO) {
+		return boardMapper.insert(boardVO);
+	}
 
 }
