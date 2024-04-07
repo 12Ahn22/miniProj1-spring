@@ -18,4 +18,6 @@ public interface MemberMapper {
 
 	int getTotalCount(PageRequestVO pageRequestVO);
 
+	MemberVO checkDuplicateId(MemberVO member);
+
 }

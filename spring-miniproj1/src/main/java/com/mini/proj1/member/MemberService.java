@@ -137,8 +137,9 @@ public class MemberService {
 //		}
 //		return list;
 //	}
-//
-//	public int insert(MemberVO member) {
+
+	public int insert(MemberVO member) {
+		return memberMapper.insert(member);
 //		try {
 //			// 멤버를 먼저 생성
 //			memberDAO.insert(member);
@@ -161,9 +162,11 @@ public class MemberService {
 //			return 0;
 //		}
 //		return 1;
-//	}
-//
-//	public boolean authenticateMember(MemberVO member) {
+	}
+
+//	public MemberVO authenticateMember(MemberVO member) {
+//		return memberMapper.authenticateMember(member);
+
 //		boolean hasAuth = false;
 //		try {
 //			hasAuth =  memberDAO.authenticateMember(member);
@@ -189,14 +192,7 @@ public class MemberService {
 //		return 1;
 //	}
 //
-//	public MemberVO checkDuplicateId(MemberVO member) {
-//		MemberVO viewMember = null;
-//		try {
-//			viewMember = memberDAO.view(member);
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//		return viewMember;
-//	}
+	public MemberVO checkDuplicateId(MemberVO member) {
+		return memberMapper.checkDuplicateId(member);
+	}
 }

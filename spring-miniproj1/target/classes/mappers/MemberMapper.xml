@@ -18,6 +18,10 @@
 		limit #{skip}, #{size}
     </select>
     
+    <select id="checkDuplicateId" resultType="com.mini.proj1.member.MemberVO">
+    	select id from tb_members where id=#{id} and password = #{password}
+    </select>
+    
     <select id="getTotalCount">
 		select 
 			count(*)  
