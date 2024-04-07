@@ -60,7 +60,7 @@
 					</form>
 				</main>
 			</div>
-			<script type="text/javascript" src="<c:url value='/js/common.js'/>"></script>
+			<script type="text/javascript" src="<c:url value='/resources/js/common.js'/>"></script>
 			<script>
 				let validUserId = false;
 
@@ -86,7 +86,7 @@
 					// 전화번호는 XXX-XXXX-XXXX 형식으로만 입력받음
 					if(!validatePhoneNumber(phone, ()=>{phone.focus()})) return;
 
-					fetch("member", {
+					fetch("insert", {
 						method: "POST",
 						body: formToSerialize("rForm"),
 						headers: { "Content-type": "application/json; charset=utf-8" }
@@ -95,7 +95,7 @@
 							if (data.status === 204) {
 								alert("회원 가입에 성공했습니다.");
 								// 페이지 리다이렉트
-								location = "member?action=list";
+								location = "list";
 							} else {
 								alert(data.statusMessage);
 							}
@@ -116,7 +116,7 @@
 						id: id.value,
 						action:"checkDuplicateId"
 					};
-					fetch("member", {
+					fetch("duplicate", {
 						method: "POST",
 						body: JSON.stringify(param),
 						headers: { "Content-type": "application/json; charset=utf-8" }

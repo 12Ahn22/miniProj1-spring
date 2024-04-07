@@ -13,7 +13,9 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mini.proj1.code.CodeService;
 import com.mini.proj1.paging.PageRequestVO;
@@ -50,8 +52,10 @@ public class MemberController {
 		return "member/memberView";
 	}
 
-//	public Map<String, Object> delete(HttpServletRequest request, MemberVO member) {
-//		Map<String, Object> map = new HashMap<>();
+	@RequestMapping("delete")
+	@ResponseBody
+	public Map<String, Object> delete(@RequestBody MemberVO member) {
+		Map<String, Object> map = new HashMap<String, Object>();
 //		HttpSession session = request.getSession();
 //		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
 //
@@ -71,29 +75,31 @@ public class MemberController {
 //				return map;
 //			}
 //		}
-//
-//		int updated = memberService.delete(member);
-//		if (updated == 1) { // 성공
-//			map.put("status", 204);
-//			// 관리자가 아니라면 세션 정보를 삭제
+
+		int updated = memberService.delete(member);
+		if (updated == 1) { // 성공
+			map.put("status", 204);
+			// 관리자가 아니라면 세션 정보를 삭제
 //			if(!loginMember.getId().equals("ADMIN")) {
 //				session.removeAttribute("loginMember");
 //				session.invalidate();
 //			}
-//		} else {
-//			map.put("status", 404);
-//			map.put("statusMessage", "회원 정보 삭제 실패하였습니다");
-//		}
-//
-//		return map;
-//	}
-//
-//	public Map<String, Object> update(HttpServletRequest request, MemberVO member) {
-//		Map<String, Object> map = new HashMap<>();
-//		HttpSession session = request.getSession();
-//		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
-//		
-//		// 로그인 하지않았다면
+		} else {
+			map.put("status", 404);
+			map.put("statusMessage", "회원 정보 삭제 실패하였습니다");
+		}
+
+		return map;
+	}
+
+	@RequestMapping("update")
+	@ResponseBody
+	public Map<String, Object> update(@RequestBody MemberVO member) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// HttpSession session = request.getSession();
+		// MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+		
+		// 로그인 하지않았다면
 //		if (loginMember == null) {
 //			map.put("status", 404);
 //			map.put("statusMessage", "로그인을 해야합니다.");
@@ -109,29 +115,32 @@ public class MemberController {
 //				return map;
 //			}
 //		}
-//
-//		int updated = memberService.update(member);
-//		if (updated == 1) { // 성공
-//			map.put("status", 204);
-//		} else {
-//			map.put("status", 404);
-//			map.put("statusMessage", "회원 정보 수정 실패하였습니다");
-//		}
-//		return map;
-//	}
-//
-//	public String fetchUpdateFormData(HttpServletRequest request, MemberVO member) {
-//		Map<String, Object> map = memberService.fetchUpdateFormData(member);
-//		request.setAttribute("member", map.get("memberVO"));
-//		request.setAttribute("hobbyList", map.get("hobbyList"));
-//		return "memberUpdate";
-//	}
-//
-//	public String fetchInsertFormData(HttpServletRequest request) {
-//		List<HobbyVO> hobbyList = memberService.fetchInsertFormData();
-//		request.setAttribute("hobbyList", hobbyList);
-//		return "memberInsert";
-//	}
+
+		int updated = memberService.update(member);
+		if (updated == 1) { // 성공
+			map.put("status", 204);
+		} else {
+			map.put("status", 404);
+			map.put("statusMessage", "회원 정보 수정 실패하였습니다");
+		}
+		return map;
+	}
+
+	@RequestMapping("updateForm")
+	public String fetchUpdateFormData(Model model, MemberVO member) {
+		log.info("멤버 업데이트 폼");
+		Map<String, Object> map = memberService.fetchUpdateFormData(member);
+		model.addAttribute("member", map.get("memberVO"));
+		// model.setAttribute("hobbyList", map.get("hobbyList"));
+		return "member/memberUpdate";
+	}
+
+	@RequestMapping("insertForm")
+	public String fetchInsertFormData(Model model) {
+		//List<HobbyVO> hobbyList = memberService.fetchInsertFormData();
+		// request.setAttribute("hobbyList", hobbyList);
+		return "member/memberInsert";
+	}
 //
 //	public Map<String, Object> insert(HttpServletRequest request, MemberVO member) {
 //		Map<String, Object> map = new HashMap<>();

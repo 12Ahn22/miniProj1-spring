@@ -56,11 +56,11 @@
 							</c:forEach>
 						</div>
 						<button class="btn btn-primary" type="submit">수정</button>
-						<a class="btn btn-secondary" href="member?action=view&id=${member.id}">취소</a>
+						<a class="btn btn-secondary" href="view?id=${member.id}">취소</a>
 					</form>
 				</main>
 			</div>
-			<script type="text/javascript" src="<c:url value='/js/common.js'/>"></script>
+			<script type="text/javascript" src="<c:url value='/resources/js/common.js'/>"></script>
 			<script>
 				// 업데이트 요청을 보내는 이벤트 리스너
 				const uForm = document.getElementById("uForm");
@@ -73,7 +73,7 @@
 					// 전화번호는 XXX-XXXX-XXXX 형식으로만 입력받음
 					if(!validatePhoneNumber(phone, ()=>{phone.focus()})) return;
 
-					fetch("member", {
+					fetch("update", {
 						method: "POST",
 						body: formToSerialize("uForm"),
 						headers: { "Content-type": "application/json; charset=utf-8" }
@@ -82,7 +82,7 @@
 							if (data.status === 204) {
 								alert("회원 정보 수정에 성공했습니다.");
 								// 페이지 리다이렉트
-								location = "member?action=view&id=${member.id}";
+								location = "view?id=${member.id}";
 							} else {
 								alert(data.statusMessage);
 							}

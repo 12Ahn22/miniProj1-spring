@@ -64,8 +64,9 @@ public class MemberService {
 //		}
 		return memberMapper.view(member);
 	}
-//
-//	public int delete(MemberVO member) {
+
+	public int delete(MemberVO member) {
+		return memberMapper.delete(member);
 //		try {
 //			memberDAO.delete(member);
 //			BaseDAO.conn.commit();
@@ -78,9 +79,10 @@ public class MemberService {
 //			return 0;
 //		}
 //		return 1;
-//	}
-//
-//	public int update(MemberVO member) {
+	}
+
+	public int update(MemberVO member) {
+		return memberMapper.update(member);
 //		try {
 //			// 멤버-취미 테이블에서 해당 멤버를 전부 삭제
 //			memberHobbyDAO.deleteAll(member.getId());
@@ -105,10 +107,10 @@ public class MemberService {
 //			return 0;
 //		}
 //		return 1;
-//	}
-//
-//	public Map<String, Object> fetchUpdateFormData(MemberVO member) {
-//		Map<String, Object> map = new HashMap<String, Object>();
+	}
+
+	public Map<String, Object> fetchUpdateFormData(MemberVO member) {
+		Map<String, Object> map = new HashMap<String, Object>();
 //		try {
 //			MemberVO memberVO = memberDAO.view(member);
 //			Map<Integer, String> memberHobbies = memberDAO.getMemberHobbies(member); // 유저가 선택한 취미 목록
@@ -122,8 +124,9 @@ public class MemberService {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-//		return map;
-//	}
+		map.put("memberVO", memberMapper.view(member));
+		return map;
+	}
 //
 //	public List<HobbyVO> fetchInsertFormData() {
 //		List<HobbyVO> list = null;
