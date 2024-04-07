@@ -33,22 +33,16 @@ public class BoardController {
 		// model.setAttribute("isLogin", isLogin);
 		return "board/boardList";
 	}
-//
-//	public String view(HttpServletRequest request, BoardVO boardVO) {
-//		// 게시글 정보
-//		BoardVO board = boardService.view(boardVO);
-//		request.setAttribute("board", board);
-//		
-//		// 수정 가능 여부
-//		HttpSession session = request.getSession();
-//		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
-//		if(loginMember != null) { // 로그인 중인 경우
-//			if(loginMember.getId().equals(board.getAuthor()) || loginMember.getId().equals("ADMIN")) { // 내가 쓴 글 혹은 어드민
-//				request.setAttribute("isLogin", true);
-//			}
-//		}
-//		return "boardView";
-//	}
+
+	@RequestMapping("view")
+	public String view(Model model, BoardVO boardVO) {
+		log.info("게시판 상세 목록");
+		// 게시글 정보
+		BoardVO board = boardService.view(boardVO);
+		model.addAttribute("board", board);
+
+		return "board/boardView";
+	}
 //
 //	public Map<String,Object> delete(HttpServletRequest request, BoardVO boardVO) {
 //		Map<String, Object> map = new HashMap<>();

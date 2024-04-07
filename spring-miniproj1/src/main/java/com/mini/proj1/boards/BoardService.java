@@ -25,24 +25,12 @@ public class BoardService {
 		}
 		return list;
 	}
-//
-//	public BoardVO view(BoardVO boardVO) {
-//		BoardVO board = null;
-//		try {
-//			// view 카운트를 증가
-//			boardDAO.increaseViewCount(boardVO.getBno());
-//			board = boardDAO.view(boardVO.getBno());
-//			BaseDAO.conn.commit();
-//		} catch (Exception e) {
-//			try {
-//				BaseDAO.conn.rollback();
-//			} catch (SQLException e1) {
-//				e1.printStackTrace();
-//			}
-//		}
-//		// board 반환
-//		return board; // 만약 얘가 없으면 어떻게 처리하지?
-//	}
+	
+	public BoardVO view(BoardVO boardVO) {
+		BoardVO board = null;
+		// boardMapper.increaseViewCount(boardVO.getBno());
+		return boardMapper.view(boardVO.getBno());
+	}
 //	
 //	public BoardVO fetchUpdateFormData(BoardVO boardVO) {
 //		BoardVO board = null;

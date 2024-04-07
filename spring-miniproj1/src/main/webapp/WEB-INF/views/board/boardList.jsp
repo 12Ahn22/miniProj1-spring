@@ -14,8 +14,8 @@
 		<jsp:include page="/layoutHeader.jsp"/>
 		<main>
 			<h1>게시물 리스트</h1>
-			<a class="btn btn-primary mb-2" href="board?action=insertForm">새 글 작성하기</a>
-			<form id="searchForm" method="get" action="board?action=list">
+			<a class="btn btn-primary mb-2" href="insertForm">새 글 작성하기</a>
+			<form id="searchForm" method="get" action="list">
 				<input type="text" name="searchKey" id="searchKey" placeholder="Search...">
 				<input type="hidden" name="action" value="list">
 				<input type="submit" value="검색">
@@ -34,7 +34,7 @@
 					<c:forEach var="board" items="${list}">
 						<tr>
 							<td>${board.bno}</td>
-							<td><a href="board?action=view&bno=${board.bno}">${board.title}</a></td>
+							<td><a href="view?bno=${board.bno}">${board.title}</a></td>
 							<td>${board.author}</td>
 							<td>${board.createdAt}</td>
 							<td>${board.viewCount}</td>
