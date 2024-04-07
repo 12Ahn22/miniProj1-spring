@@ -50,7 +50,7 @@
 						<div>
 							<label>취미:</label>
 							<c:forEach var="hobby" items="${hobbyList}">
-								<input type="checkbox" id="${hobby.id}" name="hobbies" value="${hobby.hobby}" ${member.mapHobbies[hobby.id]
+								<input type="checkbox" id="${hobby.id}" name="mapHobbies" value="${hobby.hobby}" ${member.mapHobbies[hobby.id]
 									!=null ? 'checked' : '' }>
 								<label for="${hobby.id}">${hobby.hobby}</label>
 							</c:forEach>

@@ -51,7 +51,7 @@
 						<div>
 							<label>취미:</label>
 							<c:forEach var="hobby" items="${hobbyList}">
-								<input type="checkbox" id="${hobby.id}" name="hobbies" value="${hobby.hobby}">
+								<input type="checkbox" id="${hobby.id}" name="mapHobbies" value="${hobby.hobby}">
 								<label for="${hobby.id}">${hobby.hobby}</label>
 							</c:forEach>
 						</div>

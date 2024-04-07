@@ -1,4 +1,4 @@
-const formToSerialize = (formId) =>
+const formToSerialize2 = (formId) =>
   JSON.stringify(
     [].reduce.call(
       document.querySelector('#' + formId),
@@ -42,7 +42,7 @@ const formToSerialize = (formId) =>
     )
   );
 
-const formToSerialize2 = (formId) =>
+const formToSerialize = (formId) =>
   JSON.stringify(
     [].reduce.call(
       document.getElementById(formId),
@@ -72,13 +72,10 @@ const formToSerialize2 = (formId) =>
           }
           if (element.checked) {
             // 체크된 요소만 전송
-            console.log('data[element.name]', data[element.name]);
             if (typeof data[element.name] === 'undefined') {
-              data[element.name] = [];
+              data[element.name] = {};
             }
-            const obj = {};
-            obj[element.id] = element.value;
-            data[element.name].push(obj);
+            data[element.name][element.id] = element.value;
           }
         } else {
           //그외는 모두 대상으로 함

@@ -118,18 +118,6 @@ public class MemberController {
 //			}
 //		}
 		
-		log.info("너두 널이냐? {}", member.getHobbies());
-		// 받은 취미를 전부 insert
-		List<HobbyVO> hobbies = member.getHobbies();
-		if (hobbies != null) {
-			for(int i = 0; i < hobbies.size(); i++) {
-				HobbyVO hv = hobbies.get(i);
-				log.info("왜 널? {}", hv);
-				log.info("왜 널? {}", hv.getId());
-				log.info("왜 널? {}", hv.getHobby());
-			}
-		}
-
 		int updated = memberService.update(member);
 		if (updated == 1) { // 성공
 			map.put("status", 204);

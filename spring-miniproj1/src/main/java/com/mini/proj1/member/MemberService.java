@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -94,23 +96,21 @@ public class MemberService {
 			memberHobbyMapper.deleteAll(member);
 
 			// 받은 취미를 전부 insert
-			List<HobbyVO> hobbies = member.getHobbies();
-			log.info("길이 {}", hobbies.size());
+			Map<Integer, String> hobbies = member.getMapHobbies();
 			if (hobbies != null) {
-				for(int i = 0; i < hobbies.size(); i++) {
-					HobbyVO hv = hobbies.get(i);
-					log.info("왜 널? {}", hv);
-					log.info("왜 널? {}", hv.getId());
-					log.info("왜 널? {}", hv.getHobby());
-					log.info("왜 널? {}", member.getId());
-					MemberHobbyVO memberHobbyVO = new MemberHobbyVO(member.getId(), hv.getId());
-					memberHobbyMapper.insert(memberHobbyVO);
-				}
+					for(Integer key: hobbies.keySet()) {
+						MemberHobbyVO memberHobbyVO = new MemberHobbyVO(member.getId(), key);
+						memberHobbyMapper.insert(memberHobbyVO);
+					}
+				
+//				for(int i = 0; i < hobbies.size(); i++) {
+//					Set<Entry<Integer, String>> hv = hobbies.
+////					MemberHobbyVO memberHobbyVO = new MemberHobbyVO(member.getId(), hv);
+//					memberHobbyMapper.insert(memberHobbyVO);
+//				}
 			}
 			// 멤버 수정 사항 업데이트
 			memberMapper.update(member);
-//			memberDAO.update(member);
-	//		BaseDAO.conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
