@@ -116,9 +116,9 @@ public class MemberService {
 	public Map<String, Object> fetchUpdateFormData(MemberVO member) {
 		Map<String, Object> map = new HashMap<String, Object>();
 //		try {
-//			MemberVO memberVO = memberDAO.view(member);
-//			Map<Integer, String> memberHobbies = memberDAO.getMemberHobbies(member); // 유저가 선택한 취미 목록
-//			memberVO.setHobbies(memberHobbies);
+			MemberVO memberVO =  memberMapper.view(member);
+			List<HobbyVO> memberHobbies = memberMapper.getMemberHobbies(member); // 유저가 선택한 취미 목록
+			memberVO.setHobbies(memberHobbies);
 //
 //			// Service는 여러 DAO를 가질 수 있음
 //			List<HobbyVO> hobbyList = hobbyDAO.list();
@@ -128,7 +128,8 @@ public class MemberService {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-		map.put("memberVO", memberMapper.view(member));
+		map.put("memberVO", memberVO);
+		map.put("hobbyList", hobbyMapper.list());
 		return map;
 	}
 

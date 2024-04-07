@@ -133,7 +133,7 @@ public class MemberController {
 		log.info("멤버 업데이트 폼");
 		Map<String, Object> map = memberService.fetchUpdateFormData(member);
 		model.addAttribute("member", map.get("memberVO"));
-		// model.setAttribute("hobbyList", map.get("hobbyList"));
+		model.addAttribute("hobbyList", map.get("hobbyList"));
 		return "member/memberUpdate";
 	}
 
