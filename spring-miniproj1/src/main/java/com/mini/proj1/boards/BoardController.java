@@ -6,19 +6,33 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+
+@Controller
+@Slf4j
+@RequiredArgsConstructor
+@RequestMapping("/board")
 public class BoardController {
-	BoardService boardService = new BoardService();
+	// 스프링이 의존성을 주입해준다.
+	private final BoardService boardService;
 
-//	public String list(HttpServletRequest request, BoardVO boardVO ) throws Exception {
-//		List<BoardVO> list = boardService.list(boardVO);
-//		HttpSession session = request.getSession();
-//		boolean isLogin = (session.getAttribute("loginMember") != null)? true : false;
-//		
-//		request.setAttribute("list", list);
-//		request.setAttribute("isLogin", isLogin);
-//		return "boardList";
-//	}
+	@RequestMapping("list")
+	public String list(Model model, BoardVO boardVO) throws Exception {
+		log.info("게시판 목록");
+		List<BoardVO> list = boardService.list(boardVO);
+		// HttpSession session = request.getSession();
+		// boolean isLogin = (session.getAttribute("loginMember") != null)? true : false;
+		
+		model.addAttribute("list", list);
+		// model.setAttribute("isLogin", isLogin);
+		return "board/boardList";
+	}
 //
 //	public String view(HttpServletRequest request, BoardVO boardVO) {
 //		// 게시글 정보

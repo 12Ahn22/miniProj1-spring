@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mini.proj1.boards.mapper.BoardMapper">
+
+    <sql id="search">
+        <where>
+            <if test="searchKey != null and searchKey != ''">
+                title like concat('%', #{searchKey}, '%')
+            </if>
+        </where>
+    </sql>
+
+    <select id="getList" resultType="com.mini.proj1.boards.BoardVO">
+		select tb.bno, tb.title, tm.name author, tb.content, 
+			tb.created_at, tb.view_count 
+		from tb_boards tb left join tb_members tm on tb.author = tm.id
+		<include refid="search"/>
+    </select>
+</mapper>
