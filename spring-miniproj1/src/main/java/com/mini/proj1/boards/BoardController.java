@@ -45,13 +45,16 @@ public class BoardController {
 
 		return "board/boardView";
 	}
-//
-//	public Map<String,Object> delete(HttpServletRequest request, BoardVO boardVO) {
-//		Map<String, Object> map = new HashMap<>();
-//		HttpSession session = request.getSession();
-//		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember"); // 로그인 한 유저
-//		
-//		// 로그인 하지않았다면
+
+	@RequestMapping("delete")
+	@ResponseBody
+	public Map<String,Object> delete(Model model, @RequestBody BoardVO boardVO) {
+		log.info("게시물 삭제");
+		Map<String, Object> map = new HashMap<String, Object>();
+		// HttpSession session = request.getSession();
+		// MemberVO loginMember = (MemberVO) session.getAttribute("loginMember"); // 로그인 한 유저
+		
+		// 로그인 하지않았다면
 //		if(loginMember == null) {
 //			map.put("status", 404);
 //			map.put("statusMessage", "로그인을 해야합니다.");
@@ -68,17 +71,17 @@ public class BoardController {
 //			}
 //		}
 //		
-//		int updated = boardService.delete(boardVO);
-//		
-//		if(updated == 1) { // 성공
-//			map.put("status", 204);
-//		} else {
-//			map.put("status", 404);
-//			map.put("statusMessage", "게시글 삭제에 실패하였습니다");
-//		}
-//		
-//		return map;
-//	}
+		int updated = boardService.delete(boardVO);
+		
+		if(updated == 1) { // 성공
+			map.put("status", 204);
+		} else {
+			map.put("status", 404);
+			map.put("statusMessage", "게시글 삭제에 실패하였습니다");
+		}
+		
+		return map;
+	}
 
 	@RequestMapping("updateForm")
 	public String updateForm(Model model, BoardVO boardVO) {

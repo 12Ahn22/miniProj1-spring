@@ -40,22 +40,10 @@ public class BoardService {
 		return boardMapper.update(boardVO);
 	}
 	
-//
-//	public int delete(BoardVO boardVO) {
-//		try {
-//			boardDAO.delete(boardVO.getBno());
-//			BaseDAO.conn.commit();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			try {
-//				BaseDAO.conn.rollback();
-//			} catch (SQLException e1) {
-//				e1.printStackTrace();
-//			}
-//			return 0;
-//		}
-//		return 1;
-//	}
+
+	public int delete(BoardVO boardVO) {
+		return boardMapper.delete(boardVO);
+	}
 
 //
 //	public int insert(BoardVO boardVO) {

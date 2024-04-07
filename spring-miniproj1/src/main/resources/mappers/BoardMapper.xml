@@ -27,4 +27,8 @@
      <update id="update">
 		update tb_boards set title = #{title}, content = #{content} where bno = #{bno}
     </update>
+    
+    <delete id="delete">
+    	delete from tb_boards where bno = #{bno}
+    </delete>
 </mapper>
