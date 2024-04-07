@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.mini.proj1.member.MemberVO;
+import com.mini.proj1.member.MemberVO.Gender;
 import com.mini.proj1.member.mapper.MemberMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,9 +31,9 @@ public class MemberMapperTest {
 	    			.build();
 	    	
 	    	if (i % 2 == 0) {
-	    		memberVO.setGender("M");
+	    		memberVO.setGender(Gender.M);
 	    	} else {
-	    		memberVO.setGender("F");
+	    		memberVO.setGender(Gender.F);
 	    	}
 	    	
 	    	memberMapper.insert(memberVO);
