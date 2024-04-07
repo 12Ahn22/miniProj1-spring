@@ -15,6 +15,7 @@
 				<li class="nav-item"><a class="nav-link" href="/member/logout">로그아웃</a></li>
 				<li class="nav-item"><a class="nav-link" href="/member/profile">마이페이지</a></li>
 			</c:if>
+			<li class="nav-item"><a class="nav-link" href="/member/list">회원관리</a></li>
 			<c:if test='${loginMember.id.equals("ADMIN")}'>
 				<!-- 관리자가 로그인 한 상태일 때 -->
 				<li class="nav-item"><a class="nav-link" href="/member/list">회원관리</a></li>
