@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mini.proj1.code.CodeService;
+import com.mini.proj1.hobby.HobbyVO;
 import com.mini.proj1.paging.PageRequestVO;
 import com.mini.proj1.paging.PageResponseVO;
 
@@ -48,6 +49,7 @@ public class MemberController {
 	@RequestMapping("view")
 	public String view(Model model, MemberVO member) {
 		MemberVO viewMember = memberService.view(member);
+		log.info("HOBBIES! {}", viewMember.getHobbies());
 		model.addAttribute("member", viewMember);
 		return "member/memberView";
 	}
@@ -137,8 +139,8 @@ public class MemberController {
 
 	@RequestMapping("insertForm")
 	public String fetchInsertFormData(Model model) {
-		//List<HobbyVO> hobbyList = memberService.fetchInsertFormData();
-		// request.setAttribute("hobbyList", hobbyList);
+		List<HobbyVO> hobbyList = memberService.fetchInsertFormData();
+		 model.addAttribute("hobbyList", hobbyList);
 		return "member/memberInsert";
 	}
 

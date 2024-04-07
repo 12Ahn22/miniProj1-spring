@@ -33,6 +33,12 @@
 		select id, name, address, phone, gender from tb_members where id = #{id}
     </select>
     
+    <select id="getMemberHobbies" resultType="com.mini.proj1.hobby.HobbyVO">
+    	select id, hobby 
+    	from tb_member_hobbies tmh 
+    	join tb_hobbies th on tmh.hobby_id = th.id where member_id = #{id}
+    </select>
+    
      <update id="update">
 		update tb_members set name = #{name}, password = #{password}, address = #{address}, phone = #{phone} 
 		where id = #{id}

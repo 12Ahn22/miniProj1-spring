@@ -1,6 +1,9 @@
 package com.mini.proj1.member;
 
+import java.util.List;
 import java.util.Map;
+
+import com.mini.proj1.hobby.HobbyVO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +23,8 @@ public class MemberVO {
 	private String address;
 	private String phone;
 	private Gender gender;
-	private Map<Integer, String> hobbies; // 모든 취미
+	private List<HobbyVO> hobbies; // 모든 취미
+//	private Map<Integer, String> hobbies; // 모든 취미
 	
 	// 자동 로그인을 위한 UUID
 	private String memberUUID; 

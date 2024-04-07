@@ -22,7 +22,7 @@
 					<div><span>주소:</span><span>${member.address}</span></div>
 					<div><span>취미:</span>
 						<c:forEach var="hobby" items="${member.hobbies}">
-							<span>${hobby.value}</span>
+							<span>${hobby.hobby}</span>
 						</c:forEach>
 					</div>
 					<div>

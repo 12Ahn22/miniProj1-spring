@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+
+import com.mini.proj1.hobby.HobbyVO;
+import com.mini.proj1.hobby.mapper.HobbyMapper;
 import com.mini.proj1.member.mapper.MemberMapper;
 import com.mini.proj1.paging.PageRequestVO;
 import com.mini.proj1.paging.PageResponseVO;
@@ -20,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class MemberService {
 	private final MemberMapper memberMapper;
+	private final HobbyMapper hobbyMapper;
 
 	public PageResponseVO<MemberVO> list(PageRequestVO pageRequestVO) {
 		List<MemberVO> list = null;
@@ -53,16 +57,16 @@ public class MemberService {
 //	}
 
 	public MemberVO view(MemberVO member) {
-//		MemberVO memberVO = null;
-//		try {
-//			memberVO = memberDAO.view(member);
-//			Map<Integer, String> hobbies = memberDAO.getMemberHobbies(member);
-//			if (hobbies.size() != 0)
-//				memberVO.setHobbies(hobbies);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		return memberMapper.view(member);
+		MemberVO memberVO = null;
+		List<HobbyVO> hobbies  = null;
+		try {
+			memberVO = memberMapper.view(member);
+			hobbies = memberMapper.getMemberHobbies(member);
+			if (hobbies.size() != 0) memberVO.setHobbies(hobbies);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return memberVO;
 	}
 
 	public int delete(MemberVO member) {
@@ -127,8 +131,9 @@ public class MemberService {
 		map.put("memberVO", memberMapper.view(member));
 		return map;
 	}
-//
-//	public List<HobbyVO> fetchInsertFormData() {
+
+	public List<HobbyVO> fetchInsertFormData() {
+		return hobbyMapper.list();
 //		List<HobbyVO> list = null;
 //		try {
 //			list = hobbyDAO.list();
@@ -136,7 +141,7 @@ public class MemberService {
 //			e.printStackTrace();
 //		}
 //		return list;
-//	}
+	}
 
 	public int insert(MemberVO member) {
 		return memberMapper.insert(member);
