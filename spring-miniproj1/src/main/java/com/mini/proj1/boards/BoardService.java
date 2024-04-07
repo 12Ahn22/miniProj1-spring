@@ -27,20 +27,14 @@ public class BoardService {
 	}
 	
 	public BoardVO view(BoardVO boardVO) {
-		BoardVO board = null;
 		// boardMapper.increaseViewCount(boardVO.getBno());
-		return boardMapper.view(boardVO.getBno());
+		return boardMapper.view(boardVO);
 	}
-//	
-//	public BoardVO fetchUpdateFormData(BoardVO boardVO) {
-//		BoardVO board = null;
-//		try {
-//			board =  boardDAO.view(boardVO.getBno());
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return board;
-//	}
+
+	
+	public BoardVO fetchUpdateFormData(BoardVO boardVO) {
+		return boardMapper.view(boardVO);
+	}
 //
 //	public int delete(BoardVO boardVO) {
 //		try {

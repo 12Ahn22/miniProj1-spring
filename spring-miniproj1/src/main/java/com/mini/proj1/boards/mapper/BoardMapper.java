@@ -7,6 +7,6 @@ import com.mini.proj1.boards.BoardVO;
 public interface BoardMapper {
 	List<BoardVO> getList(BoardVO boardVO);
 
-	BoardVO view(Integer bno);
+	BoardVO view(BoardVO boardVO);
 
 }

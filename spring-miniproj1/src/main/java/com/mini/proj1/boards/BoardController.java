@@ -77,13 +77,14 @@ public class BoardController {
 //		
 //		return map;
 //	}
-//
-//	public String updateForm(HttpServletRequest request, BoardVO boardVO) {
-//		// 게시글 정보
-//		BoardVO board = boardService.fetchUpdateFormData(boardVO);
-//		request.setAttribute("board", board);
-//		return "boardUpdate";
-//	}
+
+	@RequestMapping("updateForm")
+	public String updateForm(Model model, BoardVO boardVO) {
+		// 게시글 정보
+		BoardVO board = boardService.fetchUpdateFormData(boardVO);
+		model.addAttribute("board", board);
+		return "board/boardUpdate";
+	}
 //
 //	public Map<String, Object> update(HttpServletRequest request, BoardVO boardVO) {
 //		Map<String, Object> map = new HashMap<>();

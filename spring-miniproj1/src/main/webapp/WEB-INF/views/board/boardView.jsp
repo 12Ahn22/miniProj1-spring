@@ -14,7 +14,7 @@
 		<jsp:include page="/layoutHeader.jsp"/>
 		<main>
 			<h1>${board.title}</h1>
-			<a href="board?action=list">목록</a>
+			<a href="list">목록</a>
 			<div>${board.bno}</div>
 			<input type="hidden" name="bno" id="bno" value="${board.bno}">
 			<input type="hidden" name="author" id="author" value="${board.author}">
@@ -22,9 +22,13 @@
 			<div>
 				${board.content}
 			</div>
+			<div>
+				<a class="btn btn-primary" href="updateForm?bno=${board.bno}">수정</a>
+				<button class="btn btn-secondary" id="deleteBtn">삭제</button>
+			</div>
 			<c:if test="${isLogin != null}">
 				<div>
-					<a class="btn btn-primary" href="board?action=updateForm&bno=${board.bno}">수정</a>
+					<a class="btn btn-primary" href="updateForm?bno=${board.bno}">수정</a>
 					<button class="btn btn-secondary" id="deleteBtn">삭제</button>
 				</div>
 			</c:if>
@@ -41,7 +45,7 @@
 								action: "delete"
 							}
 
-							fetch("board", {
+							fetch("delete", {
 								method: "POST",
 								body: JSON.stringify(param),
 								headers: { "Content-type": "application/json; charset=utf-8" }
@@ -50,7 +54,7 @@
 								if (data.status === 204) {
 									alert("게시글 삭제에 성공했습니다.");
 									// 페이지 리다이렉트
-									location = "board?action=list";
+									location = "list";
 								} else {
 									alert(data.statusMessage);
 								}
