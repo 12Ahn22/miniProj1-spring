@@ -157,13 +157,37 @@ public class MemberController {
 		}
 		return map;
 	}
-//
-//	public Map<String, Object> login(HttpServletRequest request, HttpServletResponse response, MemberVO member) {
-//		Map<String, Object> map = new HashMap<>();
-//
-//		// 성공
+	
+	@RequestMapping("loginForm")
+	public Object loginForm() {
+		log.info("로그인 화면");
+		return "member/login";
+	}
+
+	@RequestMapping("login")
+	@ResponseBody
+	public Map<String, Object> login(@RequestBody MemberVO member, HttpSession session) {
+		log.info("LOGIN");
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		// 로그인 처리
+		MemberVO loginVO = memberService.login(member);
+		
+		if(loginVO != null) {
+			// 로그인 성공
+			session.setAttribute("loginMember", loginVO);
+			session.setMaxInactiveInterval(30 * 60 * 1000); // 30분
+			map.put("status", 204);
+		}else {
+			// 로그인 실패
+			map.put("status", 404);
+			map.put("statusMessage", "아이디 혹은 비밀번호가 잘못되었습니다.");
+		}
+		
+		
+		// 성공
 //		if (memberService.authenticateMember(member)) {
-//			HttpSession session = request.getSession();
+////			HttpSession session = request.getSession();
 //			
 //			MemberVO viewMember = memberService.view(member);
 //			if(viewMember == null) {
@@ -201,8 +225,8 @@ public class MemberController {
 //			map.put("status", 404);
 //			map.put("statusMessage", "아이디 혹은 비밀번호가 잘못되었습니다.");
 //		}
-//		return map;
-//	}
+		return map;
+	}
 //
 //	public String logout(HttpServletRequest request) {
 //		HttpSession session = request.getSession();

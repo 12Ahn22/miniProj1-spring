@@ -24,4 +24,5 @@ public interface MemberMapper {
 
 	List<HobbyVO> getMemberHobbies(MemberVO member);
 
+	MemberVO login(MemberVO member);
 }

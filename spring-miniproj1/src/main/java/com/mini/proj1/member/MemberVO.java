@@ -52,4 +52,8 @@ public class MemberVO {
         F,
         M
     }
+	
+	public boolean isEqualsPwd(String pwd) {
+		return this.password.equals(pwd);
+	}
 }

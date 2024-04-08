@@ -182,6 +182,15 @@ public class MemberService {
 //		}
 //		return hasAuth;
 //	}
+	
+	public MemberVO login(MemberVO member) {
+		MemberVO result = memberMapper.login(member);
+		if(result != null && member.isEqualsPwd(result.getPassword())) {
+			return result;
+		}
+		return null;
+	}
+	
 //
 //	public int updateUUID(MemberVO member) {
 //		try {

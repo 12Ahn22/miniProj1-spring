@@ -15,7 +15,6 @@
 				<main>
 					<h1>LOGIN</h1>
 					<form id="loginForm">
-						<input type="hidden" name="action" value="login">
 						<div>
 							<label for="id">아이디:</label>
 							<input type="text" id="id" name="id" required>
@@ -33,13 +32,12 @@
 					</form>
 				</main>
 			</div>
-			<script type="text/javascript" src="<c:url value='/js/common.js'/>"></script>
+			<script type="text/javascript" src="<c:url value='/resources/js/common.js'/>"></script>
 			<script>
 				const loginForm = document.getElementById("loginForm");
 				loginForm.addEventListener("submit", (e) => {
 					e.preventDefault();
 					console.log(formToSerialize("loginForm"));
-					return;
 					fetch("login", {
 						method: "POST",
 						body: formToSerialize("loginForm"),

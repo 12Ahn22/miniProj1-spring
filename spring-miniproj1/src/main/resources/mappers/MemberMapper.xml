@@ -33,6 +33,10 @@
 		select id, name, address, phone, gender from tb_members where id = #{id}
     </select>
     
+    <select id="login" resultType="com.mini.proj1.member.MemberVO">
+		select id, password from tb_members where id = #{id}
+    </select>
+    
     <select id="getMemberHobbies" resultType="com.mini.proj1.hobby.HobbyVO">
     	select id, hobby 
     	from tb_member_hobbies tmh 
