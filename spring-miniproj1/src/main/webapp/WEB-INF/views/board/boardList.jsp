@@ -98,9 +98,9 @@ prefix="c"%>
 		      <label>게시물 번호:</label><span id="bno"></span><br/>
 		      <label>제목 : </label><span id="title"></span><br/>
 		      <label>내용 : </label><span id="content"></span><br/>
-		      <label>ViewCount :</label><span id="view_count"></span><br/>
-		      <label>작성자 : </label><span id="writer"></span><br/>
-		      <label>작성일 : </label><span id="date"></span><br/>
+		      <label>ViewCount :</label><span id="viewCount"></span><br/>
+		      <label>작성자 : </label><span id="author"></span><br/>
+		      <label>작성일 : </label><span id="createdAt"></span><br/>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -144,10 +144,46 @@ prefix="c"%>
 		}
 		
 	const boardViewModel = document.querySelector("#boardViewModel");
+	const span_bno = document.querySelector(".modal-body #bno");
+	const span_title = document.querySelector(".modal-body #title");
+	const span_content = document.querySelector(".modal-body #content");
+	const span_viewCount = document.querySelector(".modal-body #viewCount");
+	const span_author= document.querySelector(".modal-body #author");
+	const span_createdAt = document.querySelector(".modal-body #createdAt");
+	
 	boardViewModel.addEventListener('shown.bs.modal', function (event) {
 		const a = event.relatedTarget;
 		const bno = a.getAttribute('data-bs-bno');
 		console.log("모달 대화 상자 출력... bno ", bno);
+		
+		span_bno.innerText = "";
+		span_title.innerText = "";
+		span_content.innerText = "";
+		span_viewCount.innerText = "";
+		span_author.innerText = "";
+		span_createdAt.innerText = "";
+		
+		// 요청
+		fetch(`jsonView?bno=\${bno}`, {
+			method: "GET",
+			headers: { "Content-type": "application/json; charset=utf-8" }
+		}).then((res) => res.json())
+			.then((data) => {
+			if (data.status === 204) {
+				//성공
+				const board = data.board; 
+				span_bno.innerText = board.bno;
+				span_title.innerText = board.title;
+				span_content.innerText = board.content;
+				span_viewCount.innerText = board.viewCount;
+				span_author.innerText = board.author;
+				span_createdAt.innerText = board.createdAt;
+				
+			} else {
+				alert(data.statusMessage);
+			}
+		});
+		
 	})
   </script>
 </html>

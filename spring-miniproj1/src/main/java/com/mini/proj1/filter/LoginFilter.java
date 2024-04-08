@@ -68,6 +68,7 @@ public class LoginFilter implements Filter {
 		
 		actionSet.add("/board/list");
 		actionSet.add("/board/view");
+		actionSet.add("/board/jsonView");
 		
 		webSet.add("/resources");
 	}

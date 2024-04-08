@@ -59,6 +59,24 @@ public class BoardController {
 
 		return "board/boardView";
 	}
+	
+	@RequestMapping("jsonView")
+	@ResponseBody
+	public Map<String, Object> jsonView(BoardVO boardVO) {
+		log.info("게시판 상세 목록 - JSON");
+		Map<String, Object> map = new HashMap<>();
+		// 게시글 정보
+		BoardVO board = boardService.view(boardVO);
+		
+		if(board != null) { // 성공
+			map.put("status", 204);
+			map.put("board",board);
+		} else {
+			map.put("status", 404);
+			map.put("statusMessage", "게시글 삭제에 실패하였습니다");
+		}
+		return map;
+	}
 
 	@RequestMapping("delete")
 	@ResponseBody
