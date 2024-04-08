@@ -34,7 +34,7 @@
     </select>
     
     <select id="login" resultType="com.mini.proj1.member.MemberVO">
-		select id, password from tb_members where id = #{id}
+		select id, name, address, phone, gender, password from tb_members where id = #{id}
     </select>
     
     <select id="getMemberHobbies" resultType="com.mini.proj1.hobby.HobbyVO">

@@ -22,11 +22,11 @@
 					<div><span>주소:</span><span>${member.address}</span></div>
 					<div><span>취미:</span>
 						<c:forEach var="hobby" items="${member.hobbies}">
-							<span>${hobby.value}</span>
+							<span>${hobby.hobby}</span>
 						</c:forEach>
 					</div>
 					<div>
-						<a href="member?action=updateForm&id=${member.id}">수정</a> <button id="deleteBtn">삭제</button>
+						<a href="updateForm?id=${member.id}">수정</a> <button id="deleteBtn">삭제</button>
 					</div>
 				</main>
 			</div>
@@ -38,9 +38,8 @@
 					if (confirm("정말 삭제하시겠습니까?")) {
 						const param = {
 							id: memberId.value,
-							action: "delete"
 						}
-						fetch("member", {
+						fetch("delete", {
 							method: "POST",
 							body: JSON.stringify(param),
 							headers: { "Content-type": "application/json; charset=utf-8" }

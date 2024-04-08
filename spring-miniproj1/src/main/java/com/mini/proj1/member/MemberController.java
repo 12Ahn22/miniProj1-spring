@@ -241,13 +241,16 @@ public class MemberController {
 //		// main 화면으로 리다이렉트 하도록 응답
 //		return "redirect:/";
 //	}
-//
-//	public String profile(HttpServletRequest request) {
-//		HttpSession session = request.getSession();
-//		MemberVO viewMember = (MemberVO) session.getAttribute("loginMember");
-//		request.setAttribute("member", viewMember);
-//		return "memberProfile";
-//	}
+
+	@RequestMapping("profile")
+	public String profile(HttpSession session, Model model) {
+		log.info("PROFILE");
+		MemberVO sessionMember = (MemberVO) session.getAttribute("loginMember");
+		
+		MemberVO viewMember = memberService.view(sessionMember);
+		model.addAttribute("member", viewMember);
+		return "member/memberProfile";
+	}
 
 	@RequestMapping("duplicate")
 	@ResponseBody

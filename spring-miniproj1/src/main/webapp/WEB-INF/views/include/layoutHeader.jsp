@@ -10,21 +10,22 @@
 	<nav>
 		<ul class="nav nav-pills">
 			<li class="nav-item"><a class="nav-link" href="/intro.jsp">회사소개</a></li>
-			<c:if test='${loginMember != null}'>
-				<!-- 로그인 상태일 때 수행할 내용 -->
-				<li class="nav-item"><a class="nav-link" href="/member/logout">로그아웃</a></li>
-				<li class="nav-item"><a class="nav-link" href="/member/profile">마이페이지</a></li>
-			</c:if>
-			<li class="nav-item"><a class="nav-link" href="/member/list">회원관리</a></li>
-			<c:if test='${loginMember.id.equals("ADMIN")}'>
-				<!-- 관리자가 로그인 한 상태일 때 -->
-				<li class="nav-item"><a class="nav-link" href="/member/list">회원관리</a></li>
-			</c:if>
-			<c:if test='${loginMember == null}'>
-				<!-- 비로그인 상태일 때 수행할 내용 -->
-				<li class="nav-item"><a class="nav-link" href="/member/insertForm">회원가입</a></li>
-				<li class="nav-item"><a class="nav-link" href="/member/loginForm">로그인</a></li>
-			</c:if>
+			<c:choose>
+				<c:when test='${empty loginMember}'>
+					<!-- 비로그인 상태일 때 수행할 내용 -->
+					<li class="nav-item"><a class="nav-link" href="/member/insertForm">회원가입</a></li>
+					<li class="nav-item"><a class="nav-link" href="/member/loginForm">로그인</a></li>
+				</c:when>
+				<c:otherwise>
+					<!-- 로그인 상태일 때 수행할 내용 -->
+					<!-- 관리자가 로그인 한 상태일 때 -->
+					<c:if test='${loginMember.id.equals("ADMIN")}'>
+						<li class="nav-item"><a class="nav-link" href="/member/list">회원관리</a></li>
+					</c:if>
+					<li class="nav-item"><a class="nav-link" href="/member/logout">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link" href="/member/profile">마이페이지</a></li>
+				</c:otherwise>
+			</c:choose>
 			<li class="nav-item"><a class="nav-link" href="/board/list">게시판</a></li>
 		</ul>
 	</nav>
