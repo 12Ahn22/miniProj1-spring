@@ -10,10 +10,11 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.mini.proj1.hobby.HobbyVO;
+import com.mini.proj1.entity.HobbyVO;
+import com.mini.proj1.entity.MemberHobbyVO;
+import com.mini.proj1.entity.MemberVO;
 import com.mini.proj1.hobby.mapper.HobbyMapper;
 import com.mini.proj1.member.mapper.MemberMapper;
-import com.mini.proj1.memberhobby.MemberHobbyVO;
 import com.mini.proj1.memberhobby.mapper.MemberHobbyMapper;
 import com.mini.proj1.paging.PageRequestVO;
 import com.mini.proj1.paging.PageResponseVO;

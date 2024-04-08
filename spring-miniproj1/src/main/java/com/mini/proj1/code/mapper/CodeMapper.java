@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.mini.proj1.code.CodeVO;
+import com.mini.proj1.entity.CodeVO;
 
 @Mapper
 public interface CodeMapper {

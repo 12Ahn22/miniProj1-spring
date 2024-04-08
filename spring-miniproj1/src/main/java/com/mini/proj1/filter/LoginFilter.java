@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.mini.proj1.member.MemberVO;
+import com.mini.proj1.entity.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -69,7 +69,7 @@ public class LoginFilter implements Filter {
 		actionSet.add("/board/list");
 		actionSet.add("/board/view");
 		
-		webSet.add("/mini/resources");
+		webSet.add("/resources");
 	}
 
 }

@@ -12,13 +12,13 @@
         </where>
     </sql>
 
-    <select id="getList" resultType="com.mini.proj1.member.MemberVO">
+    <select id="getList" resultType="MemberVO">
 		select id, name, address, phone, gender from tb_members
 		<include refid="search"/>
 		limit #{skip}, #{size}
     </select>
     
-    <select id="checkDuplicateId" resultType="com.mini.proj1.member.MemberVO">
+    <select id="checkDuplicateId" resultType="MemberVO">
     	select id from tb_members where id=#{id} and password = #{password}
     </select>
     
@@ -29,15 +29,15 @@
 		<include refid="search"/>
     </select>
     
-    <select id="view" resultType="com.mini.proj1.member.MemberVO">
+    <select id="view" resultType="MemberVO">
 		select id, name, address, phone, gender from tb_members where id = #{id}
     </select>
     
-    <select id="login" resultType="com.mini.proj1.member.MemberVO">
+    <select id="login" resultType="MemberVO">
 		select id, name, address, phone, gender, password from tb_members where id = #{id}
     </select>
     
-    <select id="getMemberHobbies" resultType="com.mini.proj1.hobby.HobbyVO">
+    <select id="getMemberHobbies" resultType="HobbyVO">
     	select id, hobby 
     	from tb_member_hobbies tmh 
     	join tb_hobbies th on tmh.hobby_id = th.id where member_id = #{id}

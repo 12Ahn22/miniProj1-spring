@@ -2,7 +2,7 @@ package com.mini.proj1.boards.mapper;
 
 import java.util.List;
 
-import com.mini.proj1.boards.BoardVO;
+import com.mini.proj1.entity.BoardVO;
 import com.mini.proj1.paging.PageRequestVO;
 
 public interface BoardMapper {

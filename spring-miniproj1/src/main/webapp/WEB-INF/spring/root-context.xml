@@ -19,6 +19,7 @@
 	<!-- SessionFactory에 dataSourde, Bean 객체의 별명 설정, xml 파일의 위치 설정  -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	    <property name="dataSource" ref="dataSource" />
+	    <property name="typeAliasesPackage" value="com.mini.proj1.entity"/>
 		<property name="mapperLocations" value="classpath:/mappers/**/*.xml" />
 	</bean>
 	 <!-- SqlSesionTemplate 클래스 설정  -->

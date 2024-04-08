@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import com.mini.proj1.boards.mapper.BoardMapper;
+import com.mini.proj1.entity.BoardVO;
 import com.mini.proj1.paging.PageRequestVO;
 import com.mini.proj1.paging.PageResponseVO;
 

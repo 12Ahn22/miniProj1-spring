@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mini.proj1.code.CodeService;
-import com.mini.proj1.hobby.HobbyVO;
-import com.mini.proj1.memberhobby.MemberHobbyVO;
+import com.mini.proj1.entity.HobbyVO;
+import com.mini.proj1.entity.MemberHobbyVO;
+import com.mini.proj1.entity.MemberVO;
 import com.mini.proj1.paging.PageRequestVO;
 import com.mini.proj1.paging.PageResponseVO;
 

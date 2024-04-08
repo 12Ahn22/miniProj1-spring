@@ -12,7 +12,7 @@
         </where>
     </sql>
 
-    <select id="getList" resultType="com.mini.proj1.boards.BoardVO">
+    <select id="getList" resultType="BoardVO">
 		select tb.bno, tb.title, tm.name author, tb.content, 
 			tb.created_at createdAt, tb.view_count viewCount
 		from tb_boards tb left join tb_members tm on tb.author = tm.id
@@ -27,7 +27,7 @@
 		<include refid="search"/>
     </select>
     
-    <select id="view" resultType="com.mini.proj1.boards.BoardVO">
+    <select id="view" resultType="BoardVO">
 		select bno, title, author, content, created_at createdAt ,view_count viewCount
 		from tb_boards where bno = #{bno}
     </select>

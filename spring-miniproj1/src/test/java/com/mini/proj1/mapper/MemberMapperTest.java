@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.mini.proj1.member.MemberVO;
-import com.mini.proj1.member.MemberVO.Gender;
+import com.mini.proj1.entity.MemberVO;
+import com.mini.proj1.entity.MemberVO.Gender;
 import com.mini.proj1.member.mapper.MemberMapper;
 
 import lombok.extern.slf4j.Slf4j;

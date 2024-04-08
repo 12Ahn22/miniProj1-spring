@@ -1,4 +1,4 @@
-package com.mini.proj1.boards;
+package com.mini.proj1.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

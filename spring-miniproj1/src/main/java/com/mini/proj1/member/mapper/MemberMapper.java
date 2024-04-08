@@ -3,8 +3,8 @@ package com.mini.proj1.member.mapper;
 import java.util.List;
 import java.util.Map;
 
-import com.mini.proj1.hobby.HobbyVO;
-import com.mini.proj1.member.MemberVO;
+import com.mini.proj1.entity.HobbyVO;
+import com.mini.proj1.entity.MemberVO;
 import com.mini.proj1.paging.PageRequestVO;
 
 public interface MemberMapper {

@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.mini.proj1.boards.BoardVO;
 import com.mini.proj1.boards.mapper.BoardMapper;
+import com.mini.proj1.entity.BoardVO;
 
 import lombok.extern.slf4j.Slf4j;
 
