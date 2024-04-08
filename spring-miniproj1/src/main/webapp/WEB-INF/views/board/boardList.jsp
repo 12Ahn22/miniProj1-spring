@@ -7,12 +7,7 @@ prefix="c"%>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RATTY | 게시글 목록</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
+    <jsp:include page="/WEB-INF/views/include/bootStrap.jsp" />
   </head>
   <body>
     <div class="container">
@@ -48,7 +43,7 @@ prefix="c"%>
             <c:forEach var="board" items="${pageResponseVO.list}">
               <tr>
                 <td>${board.bno}</td>
-                <td><a href="view?bno=${board.bno}">${board.title}</a></td>
+                <td><a data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="#boardViewModel" data-bs-bno="${board.bno}">${board.title}</a></td>
                 <td>${board.author}</td>
                 <td>${board.createdAt}</td>
                 <td>${board.viewCount}</td>
@@ -90,6 +85,29 @@ prefix="c"%>
         </div>
       </main>
     </div>
+    
+    <!-- 상세보기 Modal -->
+	<div class="modal fade" id="boardViewModel" role="dialog">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="staticBackdropLabel">게시물 상세보기</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+		      <label>게시물 번호:</label><span id="bno"></span><br/>
+		      <label>제목 : </label><span id="title"></span><br/>
+		      <label>내용 : </label><span id="content"></span><br/>
+		      <label>ViewCount :</label><span id="view_count"></span><br/>
+		      <label>작성자 : </label><span id="writer"></span><br/>
+		      <label>작성일 : </label><span id="date"></span><br/>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
   </body>
   <script>
     document
@@ -124,5 +142,12 @@ prefix="c"%>
 		if(urlParams.get("searchKey")){
 			searchKey.value = urlParams.get("searchKey");
 		}
+		
+	const boardViewModel = document.querySelector("#boardViewModel");
+	boardViewModel.addEventListener('shown.bs.modal', function (event) {
+		const a = event.relatedTarget;
+		const bno = a.getAttribute('data-bs-bno');
+		console.log("모달 대화 상자 출력... bno ", bno);
+	})
   </script>
 </html>
