@@ -12,7 +12,7 @@
 
 		<body>
 			<div class="container">
-				<jsp:include page="/layoutHeader.jsp" />
+				<jsp:include page="/WEB-INF/views/include/layoutHeader.jsp" />
 				<main>
 					<input type="hidden" id="memberId" value="${member.id}" />
 					<h1>${member.id}</h1>

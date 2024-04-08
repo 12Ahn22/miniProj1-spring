@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="container">
-		<jsp:include page="/layoutHeader.jsp"/>
+		<jsp:include page="/WEB-INF/views/include/layoutHeader.jsp" />
 		<main>
 			<h1>${board.title}</h1>
 			<a href="list">목록</a>

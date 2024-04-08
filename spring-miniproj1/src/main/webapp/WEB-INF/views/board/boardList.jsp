@@ -16,7 +16,7 @@ prefix="c"%>
   </head>
   <body>
     <div class="container">
-      <jsp:include page="/layoutHeader.jsp" />
+      <jsp:include page="/WEB-INF/views/include/layoutHeader.jsp" />
       <main>
         <h1>게시물 리스트</h1>
         <a class="btn btn-primary mb-2" href="insertForm">새 글 작성하기</a>

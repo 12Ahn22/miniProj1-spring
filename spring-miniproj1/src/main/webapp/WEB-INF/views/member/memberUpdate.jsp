@@ -12,7 +12,7 @@
 
 		<body>
 			<div class="container">
-				<jsp:include page="/layoutHeader.jsp" />
+				<jsp:include page="/WEB-INF/views/include/layoutHeader.jsp" />
 				<main>
 					<h1>회원 수정</h1>
 					<form id="uForm">

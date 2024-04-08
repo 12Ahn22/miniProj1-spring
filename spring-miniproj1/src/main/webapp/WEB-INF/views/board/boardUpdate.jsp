@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="container">
-		<jsp:include page="/layoutHeader.jsp"/>
+		<jsp:include page="/WEB-INF/views/include/layoutHeader.jsp" />
 		<main>
 			<h2>게시물 수정</h2>
 			<form id="uForm">

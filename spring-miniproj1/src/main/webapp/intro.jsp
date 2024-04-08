@@ -10,7 +10,7 @@
 </head>
 <body>
   <div class="container">
-    <jsp:include page="layoutHeader.jsp"/>
+    <jsp:include page="/WEB-INF/views/include/layoutHeader.jsp" />
   </div>
 </body>
 </html>
