@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    https://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/security 
+    http://www.springframework.org/schema/security/spring-security.xsd">
+    
+    <beans:bean id ="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+    <beans:bean id="customUserDetailsService" class="com.mini.proj1.member.MemberService" />
+    
+    <http pattern="/" security="none"></http>
+    <http pattern="/intro" security="none"></http>
+    <http pattern="/loginForm" security="none"></http>
+    <http pattern="/resources/**" security="none"></http>
+    
+    <http auto-config="true">
+    	<csrf disabled="true"/>
+        <!-- 모든 경로에 인증된 경우만 접근 가능하도록 하는 코드 -->
+        <intercept-url pattern="/*/**" access="isAuthenticated()"/>
+        <!-- login-page="/login"  -> get방식으로 호출되는 URL -->
+        <!-- login-processing-url="/login" -> post방식으로 호출되는 URL -->
+        <form-login
+            login-page="/loginForm" 
+            login-processing-url="/login" 
+            username-parameter="email"
+            password-parameter="password" 
+            default-target-url="/" />
+    </http>
+
+	<authentication-manager> <!-- AuthenticationManager를 설정-->
+		<!-- AuthenticationProvider를 설정 -->
+	    <authentication-provider user-service-ref="customUserDetailsService">
+	        <password-encoder ref="bcryptPasswordEncoder"/>
+	    </authentication-provider>
+	</authentication-manager>
+
+</beans:beans>

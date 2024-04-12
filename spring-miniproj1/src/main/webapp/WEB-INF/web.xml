@@ -2,7 +2,10 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/spring/root-context.xml</param-value>
+    <param-value>
+    	/WEB-INF/spring/root-context.xml
+    	/WEB-INF/spring/security-context.xml
+    </param-value>
   </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -21,14 +24,14 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
   
-  <filter>
-    <display-name>LoginFilter</display-name>
-    <filter-name>LoginFilter</filter-name>
-    <filter-class>com.mini.proj1.filter.LoginFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>LoginFilter</filter-name>
-    <url-pattern>*</url-pattern>
-  </filter-mapping>
-  
+  <!-- filter-name은 반드시 springSecurityFilterChain이여야한다. -->
+	<filter>
+	    <filter-name>springSecurityFilterChain</filter-name>
+	    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+	    <filter-name>springSecurityFilterChain</filter-name>
+	    <!-- 모든 경로에 스프링 시큐리티 필터를 적용하겠다는 의미 -->
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>

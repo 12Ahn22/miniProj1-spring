@@ -1,13 +1,13 @@
 package com.mini.proj1.member;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.mini.proj1.entity.HobbyVO;
@@ -26,10 +26,14 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class MemberService {
-	private final MemberMapper memberMapper;
-	private final HobbyMapper hobbyMapper;
-	private final MemberHobbyMapper memberHobbyMapper;
+public class MemberService implements UserDetailsService {
+	// 레거시라 @Autowired를 사용해주지 않으면 security-context.xml에서 에러 발생
+	@Autowired
+	private MemberMapper memberMapper;
+	@Autowired
+	private HobbyMapper hobbyMapper;
+	@Autowired
+	private MemberHobbyMapper memberHobbyMapper;
 
 	public PageResponseVO<MemberVO> list(PageRequestVO pageRequestVO) {
 		List<MemberVO> list = null;
@@ -52,15 +56,6 @@ public class MemberService {
 		}
 		return pageResponseVO;
 	}
-//	MemberDAO memberDAO = new MemberDAO(); // 유저 정보
-//	HobbyDAO hobbyDAO = new HobbyDAO(); // 취미
-//	MemberHobbyDAO memberHobbyDAO = new MemberHobbyDAO(); // 멤버-취미 관계
-//
-//	public List<MemberVO> list() throws SQLException {
-//		List<MemberVO> list = null;
-//		list = memberDAO.list();
-//		return list;
-//	}
 
 	public MemberVO view(MemberVO member) {
 		MemberVO memberVO = null;
@@ -77,18 +72,6 @@ public class MemberService {
 
 	public int delete(MemberVO member) {
 		return memberMapper.delete(member);
-//		try {
-//			memberDAO.delete(member);
-//			BaseDAO.conn.commit();
-//		} catch (Exception e) {
-//			try {
-//				BaseDAO.conn.rollback();
-//			} catch (SQLException e1) {
-//				e1.printStackTrace();
-//			}
-//			return 0;
-//		}
-//		return 1;
 	}
 
 	public int update(MemberVO member) {
@@ -103,12 +86,6 @@ public class MemberService {
 						MemberHobbyVO memberHobbyVO = new MemberHobbyVO(member.getId(), key);
 						memberHobbyMapper.insert(memberHobbyVO);
 					}
-				
-//				for(int i = 0; i < hobbies.size(); i++) {
-//					Set<Entry<Integer, String>> hv = hobbies.
-////					MemberHobbyVO memberHobbyVO = new MemberHobbyVO(member.getId(), hv);
-//					memberHobbyMapper.insert(memberHobbyVO);
-//				}
 			}
 			// 멤버 수정 사항 업데이트
 			memberMapper.update(member);
@@ -137,79 +114,36 @@ public class MemberService {
 
 	public List<HobbyVO> fetchInsertFormData() {
 		return hobbyMapper.list();
-//		List<HobbyVO> list = null;
-//		try {
-//			list = hobbyDAO.list();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return list;
 	}
 
 	public int insert(MemberVO member) {
 		return memberMapper.insert(member);
-//		try {
-//			// 멤버를 먼저 생성
-//			memberDAO.insert(member);
-//			// 취미-멤버 테이블에 데이터 생성
-//			Map<Integer, String> hobbies = member.getHobbies();
-//			if (hobbies != null) {
-//				for (var hobby : hobbies.entrySet()) {
-//					memberHobbyDAO.insert(member.getId(), hobby.getKey());
-//				}
-//			}
-//			BaseDAO.conn.commit();
-//		} catch (Exception e) {
-//			try {
-//				// SQL 에러가 나면, 여기서 처리
-//				e.printStackTrace();
-//				BaseDAO.conn.rollback();
-//			} catch (SQLException e1) {
-//				e1.printStackTrace();
-//			}
-//			return 0;
-//		}
-//		return 1;
 	}
 
-//	public MemberVO authenticateMember(MemberVO member) {
-//		return memberMapper.authenticateMember(member);
-
-//		boolean hasAuth = false;
-//		try {
-//			hasAuth =  memberDAO.authenticateMember(member);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return hasAuth;
-//	}
-	
-	public MemberVO login(MemberVO member) {
-		MemberVO result = memberMapper.login(member);
-		if(result != null && member.isEqualsPwd(result.getPassword())) {
-			return result;
-		}
-		return null;
-	}
-	
-//
-//	public int updateUUID(MemberVO member) {
-//		try {
-//			memberDAO.updateUUID(member);
-//			BaseDAO.conn.commit();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			try {
-//				BaseDAO.conn.rollback();
-//			} catch (SQLException e1) {
-//				e1.printStackTrace();
-//			}
-//			return 0;
-//		}
-//		return 1;
-//	}
-//
 	public MemberVO checkDuplicateId(MemberVO member) {
 		return memberMapper.checkDuplicateId(member);
+	}
+	
+	
+//	public MemberVO login(MemberVO member) {
+//		MemberVO result = memberMapper.login(member);
+//		if(result != null && member.isEqualsPwd(result.getPassword())) {
+//			return result;
+//		}
+//		return null;
+//	}
+
+	// 기존 로그인 로직을 스프링 시큐리티로 처리하도록 변경
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		try {
+			log.info("LOAD USER BY USERNAME {}", username);
+			MemberVO resultVO = memberMapper.login(MemberVO.builder().id(username).build());
+			return resultVO;
+		} catch (Exception e) {
+			log.info("LOAD USER BY USERNAME FAIL");
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

@@ -15,9 +15,10 @@
 				<main>
 					<h1>LOGIN</h1>
 					<form id="loginForm">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						<div>
-							<label for="id">아이디:</label>
-							<input type="text" id="id" name="id" required>
+							<label for="email">아이디:</label>
+							<input type="text" id="email" name="email" required>
 						</div>
 						<div>
 							<label for="password">비밀번호:</label>
@@ -38,7 +39,7 @@
 				loginForm.addEventListener("submit", (e) => {
 					e.preventDefault();
 					console.log(formToSerialize("loginForm"));
-					fetch("login", {
+					fetch("/login", {
 						method: "POST",
 						body: formToSerialize("loginForm"),
 						headers: { "Content-type": "application/json; charset=utf-8" }
