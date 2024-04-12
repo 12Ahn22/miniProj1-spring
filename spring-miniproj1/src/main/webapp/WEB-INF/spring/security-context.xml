@@ -35,6 +35,10 @@
             authentication-failure-handler-ref="authFailureHandler"
             authentication-success-handler-ref="authSucessHandler"
              />
+        <logout
+            logout-url="/logout"
+            logout-success-url="/"
+            delete-cookies="JSESSIONID" />
     </http>
 
 	<authentication-manager> <!-- AuthenticationManager를 설정-->

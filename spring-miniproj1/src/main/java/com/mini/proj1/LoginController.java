@@ -20,13 +20,4 @@ public class LoginController {
 		model.addAttribute("error", error);
 		model.addAttribute("exception", exception);
 	}
-	
-	@GetMapping("/logout")
-	public String logout(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			session.invalidate();
-		}
-		return "redirect:/";
-	}
 }
