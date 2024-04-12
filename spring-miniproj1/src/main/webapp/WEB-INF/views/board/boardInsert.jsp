@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -18,7 +22,7 @@
 				<label for="title">제목:</label><br>
 				<input type="text" id="title" name="title"><br>
 				<label for="author">작성자:</label><br>
-				<input type="text" id="author" name="author" value="${member.id}" readonly><br>
+				<input type="text" id="author" name="author" value="${principal.id}" readonly><br>
 				<label for="content">내용:</label><br>
 				<textarea id="content" name="content" rows="4" cols="50"></textarea><br><br>
 				<input type="submit" value="생성">

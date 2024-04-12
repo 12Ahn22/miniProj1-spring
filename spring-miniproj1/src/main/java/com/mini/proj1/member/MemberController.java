@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -244,12 +245,12 @@ public class MemberController {
 //	}
 
 	@RequestMapping("profile")
-	public String profile(HttpSession session, Model model) {
+	public String profile(Authentication authentication, Model model) {
 		log.info("PROFILE");
-		MemberVO sessionMember = (MemberVO) session.getAttribute("loginMember");
-		
-		MemberVO viewMember = memberService.view(sessionMember);
-		model.addAttribute("member", viewMember);
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+		log.info("MEMBER_VO = {} ", memberVO);
+		 MemberVO viewMember = memberService.view(memberVO);
+		 model.addAttribute("member", viewMember);
 		return "member/memberProfile";
 	}
 
