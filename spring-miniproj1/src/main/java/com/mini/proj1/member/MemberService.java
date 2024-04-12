@@ -137,14 +137,12 @@ public class MemberService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		log.info("#### loadUserByUsername ####");
-		try {
-			log.info("LOAD USER BY USERNAME: {}", username);
-			MemberVO resultVO = memberMapper.login(MemberVO.builder().id(username).build());
-			return resultVO;
-		} catch (Exception e) {
-			log.info("LOAD USER BY USERNAME FAIL");
-			e.printStackTrace();
-			return null;
+		log.info("LOAD USER BY USERNAME: {}", username);
+		MemberVO resultVO = memberMapper.login(MemberVO.builder().id(username).build());
+		if(resultVO == null) {
+			log.info("사용자가 존재하지 않습니다.");
+			throw new UsernameNotFoundException(username + " 사용자가 존재하지 않습니다");
 		}
+		return resultVO;
 	}
 }

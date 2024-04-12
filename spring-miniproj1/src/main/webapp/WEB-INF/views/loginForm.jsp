@@ -13,6 +13,7 @@
 		<jsp:include page="/WEB-INF/views/include/layoutHeader.jsp" />
 		<main>
 			<h1>LOGIN</h1>
+			${error ? exception : ''}
 			<form id="loginForm" method="post" action="/login">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<div>

@@ -9,6 +9,7 @@
     
     <beans:bean id ="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
     <beans:bean id="customUserDetailsService" class="com.mini.proj1.member.MemberService" />
+    <beans:bean id="authFailureHandler" class="com.mini.proj1.member.AuthFailureHandler" />
     
     <http pattern="/" security="none"></http>
     <http pattern="/intro" security="none"></http>
@@ -28,7 +29,9 @@
             login-processing-url="/login" 
             username-parameter="email"
             password-parameter="password" 
-            default-target-url="/" />
+            default-target-url="/"
+            authentication-failure-handler-ref="authFailureHandler"
+             />
     </http>
 
 	<authentication-manager> <!-- AuthenticationManager를 설정-->
