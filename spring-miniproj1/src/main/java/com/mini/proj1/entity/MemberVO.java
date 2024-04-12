@@ -1,11 +1,14 @@
 package com.mini.proj1.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
@@ -13,12 +16,16 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 @Builder
+@Slf4j
+@ToString
 public class MemberVO implements UserDetails{
 	private String id;
 	private String name;
@@ -31,6 +38,7 @@ public class MemberVO implements UserDetails{
 	private LocalDateTime last_login_time; // 마지막 로그인 시간
 	private String roles; // 권한. ex) "USER, ADMIN, ..." 문자열
 	private String account_locked; // 계정 잠금 여부 Y, N
+	private int login_count; // 로그인 횟수
 	
 	// 자동 로그인을 위한 UUID
 	private String memberUUID; 
@@ -65,6 +73,10 @@ public class MemberVO implements UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Collection<GrantedAuthority> collections = new ArrayList<GrantedAuthority>();
+
+		Arrays.stream(roles.split(","))
+			.forEach(role -> collections.add(new SimpleGrantedAuthority("ROLE_" + role.trim())));
 		return null;
 	}
 
@@ -79,12 +91,12 @@ public class MemberVO implements UserDetails{
 	}
 
 	@Override
-	public boolean isAccountNonExpired() {
-		return true;
+	public boolean isAccountNonLocked() {
+		return "N".equalsIgnoreCase(account_locked);
 	}
 
 	@Override
-	public boolean isAccountNonLocked() {
+	public boolean isAccountNonExpired() {
 		return true;
 	}
 

@@ -38,6 +38,8 @@ public class AuthSucessHandler extends SimpleUrlAuthenticationSuccessHandler {
 		//성공시 이동할 주소 
         setDefaultTargetUrl("/board/list");
         
+        memberMapper.loginCountClear(authentication.getName());
+        
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }
