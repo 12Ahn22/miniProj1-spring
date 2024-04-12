@@ -136,8 +136,9 @@ public class MemberService implements UserDetailsService {
 	// 기존 로그인 로직을 스프링 시큐리티로 처리하도록 변경
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		log.info("#### loadUserByUsername ####");
 		try {
-			log.info("LOAD USER BY USERNAME {}", username);
+			log.info("LOAD USER BY USERNAME: {}", username);
 			MemberVO resultVO = memberMapper.login(MemberVO.builder().id(username).build());
 			return resultVO;
 		} catch (Exception e) {
