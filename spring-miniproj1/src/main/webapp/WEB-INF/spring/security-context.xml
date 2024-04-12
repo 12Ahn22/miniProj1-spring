@@ -9,7 +9,9 @@
     
     <beans:bean id ="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
     <beans:bean id="customUserDetailsService" class="com.mini.proj1.member.MemberService" />
+    <!-- 로그인 실패, 성공 시 처리를 위한 로직이 있는 곳 -->
     <beans:bean id="authFailureHandler" class="com.mini.proj1.member.AuthFailureHandler" />
+    <beans:bean id="authSucessHandler" class="com.mini.proj1.member.AuthSucessHandler" />
     
     <http pattern="/" security="none"></http>
     <http pattern="/intro" security="none"></http>
@@ -31,6 +33,7 @@
             password-parameter="password" 
             default-target-url="/"
             authentication-failure-handler-ref="authFailureHandler"
+            authentication-success-handler-ref="authSucessHandler"
              />
     </http>
 
