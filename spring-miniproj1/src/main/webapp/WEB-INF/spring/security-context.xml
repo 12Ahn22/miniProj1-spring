@@ -13,6 +13,8 @@
     <http pattern="/" security="none"></http>
     <http pattern="/intro" security="none"></http>
     <http pattern="/loginForm" security="none"></http>
+    <http pattern="/member/insertForm" security="none"></http>
+    <http pattern="/member/insert" security="none"></http>
     <http pattern="/resources/**" security="none"></http>
     
     <http auto-config="true">
